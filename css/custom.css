@@ -1,0 +1,16 @@
+body{
+  background: black;
+}
+
+.container{
+  background-color:#c2c4c6;
+}
+
+
+.center{
+  text-align: center;
+}
+h1{
+  font-size: 30px;
+  margin-top: 20px;
+}
