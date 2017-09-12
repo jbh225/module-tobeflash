@@ -8,9 +8,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
   <link rel="stylesheet" href="css/custom.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.print.css">
 
   <link rel="shortcut icon" href="img/logo.png">
   <title>Module | ToBeFlash</title>
@@ -42,11 +39,51 @@
         </form>
       </div>
 
+      <div class="col-lg-4">
+        <!--debut php-->
+        <?php
+        require ('date.php');
+
+        $date = new Date();
+
+        $year = date ('Y');
+        $dates = $date->getAll($year);
+        ?>
+
+        <div class="periods">
+          <div class="year"><?php echo $year ?></div>
+          <div class="months">
+            <ul>
+              <?php foreach ($date->months as $id=>$m): ?>
+                <li><a href="#" id="linkMonth <?php echo $id+1; ?>"><?php echo utf8_encode(substr(utf8_decode($m),0,3)); ?></a></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+          <?php $dates = current($dates); ?>
+          <?php foreach  ($dates as $m=>$days): ?>
+
+            <div class="month" id="month<?php echo $m; ?>">
+              <table>
+                <thead>
+                  <tr>
+                    <?php foreach ($date->days as $d): ?>
+                      <th><?php echo substr($d,0,3); ?></th>
+                    <?php endforeach; ?>
+                  </tr>
+                </thead>
+
+              </table>
+            </div>
+          <?php endforeach; ?>
+
+        </div>
+
+        <!--fin php-->
+
+      </div>
 
       <div class="col-lg-4">
-
-        <div id="calendarMain" class="calendarMain"></div>
-
+        <pre><?php print_r($dates); ?></pre>
 
 
       </div>
@@ -56,29 +93,8 @@
   <!--fin container-->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-  <script src="js/script.js" type="text/javascript"></script>
-  <script src="js/new-script.js"></script>
-  <script type="text/javascript">
-  //<![CDATA[
-  var myCalendar = new jsSimpleDatePickr();
-  myCalendar.CalAdd({
-  'divId': 'calendarMain',
-  'inputFieldId': 'no',
-  'dateMask': 'JJ/MM/AAAA',
-  'dateCentury': 20,
-  'titleMask': 'M AAAA',
-  'navType': '11',
-  'classTable': 'jsCalendar',
-  'classDay': 'day',
-  'classDaySelected': 'selectedDay',
-  'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-  'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-  'hideOnClick': false,
-  'showOnLaunch': true
-  });
-  //]]>
+  <script src="js/script/js" type="text/javascript">
+
   </script>
-
-
 </body>
 </html>
